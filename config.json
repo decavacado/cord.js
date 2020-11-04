@@ -1,0 +1,13 @@
+{
+    "url": {
+        "hostname": "discord.com",
+        "path": "/api/v6/users/@me",
+        "headers": {
+            "User-Agent": "DiscordBot (https://discord.com/api/v6, 6)"
+        }
+    },
+    "ur": "https://discord.com/api/v6",
+    "cdn": "https://cdn.discordapp.com",
+    "version": 8,
+    "gate": "wss://gateway.discord.gg/?v=8&encoding=json"
+}
