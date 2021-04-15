@@ -5,7 +5,7 @@ const fetch = require("node-fetch")
 const guild = require("./guild.js")
 const { EventEmitter } = require("events")
 
-class User extends EventEmitter {
+class Client extends EventEmitter {
     constructor(obj, ws, auth){
         super()
         this.username = obj.user.username
@@ -49,9 +49,29 @@ class User extends EventEmitter {
             return element.id === id
         })
 
-        this.guilds[server_index] = guild
+        this.guilds[server_index] = {...this.guilds[server_index] , ...guild}
     }
+
+    set_channel(id, channel) {
+        let server_index = this.guilds.findIndex(function(element){
+            return element.id === id
+        })
+
+        this.guilds[server_index].channels.push(channel)
+    }
+
+    update_channel(id, channel) {
+        let server_index = this.guilds.findIndex(function(element){
+            return element.id === id
+        })
+
+        let channel_index = this.guilds[server_index].channels.findIndex(function(element){
+            return element.id === channel.id
+        })
+
+        this.guilds[server_index].channels[channel_index] = {...this.guilds[server_index].channels[channel_index], ...channel}
+    } 
 
 }
 
-module.exports = User
+module.exports = Client

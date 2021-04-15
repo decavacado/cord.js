@@ -1,13 +1,13 @@
 {
   "name": "dis",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discord API library",
   "main": "index.js",
   "scripts": {
     "test": "nodemon main.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Decavacado",
   "license": "ISC",
   "dependencies": {
     "fetch": "^1.1.0",
