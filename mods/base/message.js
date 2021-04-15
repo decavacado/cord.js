@@ -6,6 +6,9 @@ const channel = require("./channel.js")
 const mentions = require("./extras/mentions.js")
 
 class Message {
+    //Private properties
+    #_auth
+
     constructor(mess, auth, guild){
         this.message = mess.content
         this.channel_id = mess.channel_id
@@ -23,7 +26,7 @@ class Message {
         }
         this.guild = guild
         this.channel = guild.get_channel(mess.channel_id)
-        this._auth = auth
+        this.#_auth = auth
 
         if(mess.mentions){
             this.ments= new mentions(mess.mentions)
@@ -33,7 +36,7 @@ class Message {
     }
 
     edit(content){
-        let auth = this._auth
+        let auth = this.#_auth
         let init = {
             method: "PATCH", 
             headers: {
@@ -61,7 +64,7 @@ class Message {
     }
 
     embed(em, content=""){
-        let auth = this._auth
+        let auth = this.#_auth
         let init = {
             method: "POST", 
             headers: {
@@ -81,13 +84,12 @@ class Message {
                 return res.json()
             })
             .then(function(obj){
-                console.log("EMBED")
-                console.log(obj)
+
             })
     }
 
-    reply(content){
-        let auth = this._auth
+    reply(content, em={}){
+        let auth = this.#_auth
         let mention = `<@!${this.author.id}>`
         let init = {
             method: "POST", 
@@ -97,11 +99,9 @@ class Message {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                content: `${mention}${content}`,
+                content: `${mention} ${content}`,
                 tts: false,
-                embed: {
-                    
-                }
+                embed: em
 
             })
         }
@@ -110,8 +110,7 @@ class Message {
                 return res.json()
             })
             .then(function(obj){
-                console.log("MHM")
-                console.log(obj)
+
             })
     }
 

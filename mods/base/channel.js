@@ -5,6 +5,8 @@ const Message = require("./message.js")
 const fetch = require("node-fetch")
 
 class Channel {
+    #_auth
+
     constructor(auth ,{name, nsfw, guild_id, type, id, parent_id, topic, last_message_id}, guild){
         console.log(type, "The type")
         if(type === 0){
@@ -12,16 +14,20 @@ class Channel {
             this.topic = topic
             this.id = id
             this.parent = parent_id
-            this.nsfw = nsfw
+            if(nsfw) {
+                this.nsfw = nsfw
+            }else {
+                this.nsfw = false
+            }
             this.last_message_id = last_message_id
-            this._auth = auth
+            this.#_auth = auth
         }
 
         this.guild = guild
     }
 
     async get_messages(limit=1) {
-        let auth = this._auth
+        let auth = this.#_auth
         let init = {
             headers: {
                 "User-Agent": `DiscordBot (${endpoint}, ${version})`,
@@ -37,7 +43,7 @@ class Channel {
     }
 
     async send(content) {
-        let auth = this._auth
+        let auth = this.#_auth
         let init = {
             method: "POST", 
             headers: {

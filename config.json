@@ -1,7 +1,7 @@
 {
     "url": {
         "hostname": "discord.com",
-        "path": "/api/v6/users/@me",
+        "path": "/api/v8/users/@me",
         "headers": {
             "User-Agent": "DiscordBot (https://discord.com/api/v6, 6)"
         }
@@ -9,5 +9,20 @@
     "ur": "https://discord.com/api/v6",
     "cdn": "https://cdn.discordapp.com",
     "version": 8,
-    "gate": "wss://gateway.discord.gg/?v=8&encoding=json"
+    "api_version": 8,
+    "gate": "wss://gateway.discord.gg/?v=8&encoding=json",
+    "gateway_opcodes": {
+        "0": "Dispatch",
+        "1": "Heartbeat",
+        "2": "Identify",
+        "3": "Presence Update",
+        "4": "Voice State Update",
+        "6": "Resume",
+        "7": "Reconnect",
+        "8": "Request Guild Members",
+        "9": "Invalid Session",
+        "10": "Hello",
+        "11": "Heartbeat ACK"
+    },
+    "lib_name": "cord"
 }
